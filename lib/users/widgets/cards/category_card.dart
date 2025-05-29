@@ -1,0 +1,310 @@
+import 'package:flutter/material.dart';
+
+class ServiceGrid extends StatelessWidget {
+  const ServiceGrid({super.key});
+
+  final List< dynamic> services = const [
+    {
+      "title": "MARKET PLACE",
+      "subtitle": "Instant Delivery",
+      "tagText": "30 Mins",
+      "discount": "",
+      "imagePath": "assets/images/market.png",
+    },
+    {
+      "title": "RIDES",
+      "subtitle": "Rides For You ❤️ On Time",
+      "tagText": "",
+      "discount": "Upto 70%",
+      "imagePath": "assets/images/pickup.png",
+      "isNew": true,
+    },
+    {
+      "title": "PICKUP TRUCK",
+      "subtitle": "Pickup For You ❤️ On Time",
+      "tagText": "",
+      "discount": "Upto 70%",
+      "imagePath": "assets/images/truck.png",
+    },
+    {
+      "title": "HOME SERVICES",
+      "subtitle": "Home Services ❤️ On Time",
+      "tagText": "",
+      "discount": "Upto 60%",
+      "imagePath": "assets/images/service.png",
+    },
+    {
+      "title": "USED CARS",
+      "subtitle": "Used For You ❤️ On Time",
+      "tagText": "",
+      "discount": "Upto 60%",
+      "imagePath": "assets/images/cars2.png",
+      "isNew": true,
+    },
+    {
+      "title": "LAUNDRY",
+      "subtitle": "Laundry For You ❤️ On Time",
+      "tagText": "",
+      "discount": "Upto 70%",
+      "imagePath": "assets/images/laundry.png",
+      "isNew": true,
+    },
+    {
+      "title": "VEHICLE SERVICES",
+      "subtitle": "Vehicle For You ❤️ On Time",
+      "tagText": "",
+      "discount": "Upto 50%",
+      "imagePath": "assets/images/mechanic.png",
+    },
+    {
+      "title": "FOOD & GROCERY",
+      "subtitle": "Food & Grocery For You",
+      "tagText": "",
+      "discount": "Upto 70%",
+      "imagePath": "assets/images/food_groc.png",
+    },
+    {
+      "title": "SEND PARCEL",
+      "subtitle": "Cosmetic For You ❤️ On Time",
+      "tagText": "",
+      "discount": "Upto 70%",
+      "imagePath": "assets/images/parcel.png",
+    },
+    {
+      "title": "PET CARE",
+      "subtitle": "Charity For You ❤️ On Time",
+      "tagText": "",
+      "discount": "Upto 50%",
+      "imagePath": "assets/images/pet_care.png",
+      "isComingSoon": true,
+    },
+    {
+      "title": "EXPLORE MORE",
+      "subtitle": "Categories ❤️ On Time",
+      "tagText": "",
+      "discount": "Upto 50%",
+      "imagePath": "assets/images/explore.png",
+    },
+    {
+      "title": "CHARITY",
+      "subtitle": "Charity For You ❤️ On Time",
+      "tagText": "",
+      "discount": "Upto 50%",
+      "imagePath": "assets/images/charity.png",
+      "isComingSoon": true,
+    },
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    final List<Map<String, dynamic>> evenServices = [];
+    final List<Map<String, dynamic>> oddServices = [];
+
+    for (int i = 0; i < services.length; i++) {
+      if (i % 2 == 0) {
+        evenServices.add(services[i]);
+      } else {
+        oddServices.add(services[i]);
+      }
+    }
+
+    Widget buildServiceCard(Map<String, dynamic> service, bool isFirstCard) {
+      final double cardWidth = screenWidth * 0.48;
+      final double cardHeight = isFirstCard ? screenHeight * 0.2 : screenHeight * 0.13;
+      final double imageSize = isFirstCard ? cardWidth * 0.72 : cardWidth * 0.4;
+      final double imageLeft = cardWidth - imageSize - 9;
+      final double imageTop = cardHeight - imageSize - 5;
+      final double firstImageTop = cardHeight - imageSize - 5;
+
+      return Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            height: cardHeight,
+            width: cardWidth,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black12,
+                  offset: Offset(1, 1),
+                  blurRadius: 15,
+                  spreadRadius: 2,
+                ),
+              ],
+            ),
+            child: Card(
+              elevation: 1,
+              shadowColor: Color(0XFFFDCECF),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (service['isComingSoon'] == true) const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Text(
+                          service['title'],
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        if (service['isNew'] == true) ...[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 3.0),
+                                child: Text(
+                                  "NEW",
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      service['subtitle'],
+                      style: const TextStyle(
+                        fontSize: 8,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    if (isFirstCard && service['tagText'].isNotEmpty)
+                      Container(
+                        height: 30,
+                        width: 80,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.red),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            const Icon(Icons.flash_on, color: Colors.red),
+                            Text(service['tagText']),
+                          ],
+                        ),
+                      )
+                    else if (service['discount'].isNotEmpty)
+                      Row(
+                        children: [
+                          Container(
+                            height: 20,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              color: const Color(0XFFFFE5E6),
+                              borderRadius: BorderRadius.circular(40),
+                            ),
+                            child: Center(
+                              child: Text(
+                                service['discount'],
+                                style: const TextStyle(
+                                  fontSize: 8,
+                                  color: Color(0XFFDE3033),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    if (isFirstCard) const Spacer(),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            top: isFirstCard ? firstImageTop : imageTop,
+            left: imageLeft,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                service['imagePath'],
+                fit: BoxFit.cover,
+                width: imageSize,
+                height: imageSize,
+              ),
+            ),
+          ),
+          if (service['isComingSoon'] == true)
+            Positioned(
+              left: cardWidth / 2 - 50,
+              top: -5,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.red,
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 3.0),
+                  child: Text(
+                    "Coming soon",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+        ],
+      );
+    }
+
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                children: [
+                  buildServiceCard(evenServices[0], true),
+                  const SizedBox(height: 8.0),
+                  for (int i = 1; i < evenServices.length; i++)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: buildServiceCard(evenServices[i], false),
+                    ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 8.0),
+            Expanded(
+              child: Column(
+                children: [
+                  for (int i = 0; i < oddServices.length; i++)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: buildServiceCard(oddServices[i], false),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
