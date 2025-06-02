@@ -1,50 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../apiservice.dart';
-
-// Utility to convert hex string to Color
-Color hexToColor(String hex) {
-  hex = hex.replaceAll('#', '');
-
-  // Remove "0x" if it's already present
-  if (hex.startsWith('0x')) {
-    hex = hex.substring(2);
-  }
-  if (hex.length == 6) {
-    hex = 'FF$hex'; // Add full opacity
-  }
-  return Color(int.parse('0x$hex'));
-}
-
-// Color manager class
 class AppColors {
-  String color_1 = "";
-  String color_2 = "";
-  String color_3 = "";
+  // Gradient 1 colors
+  static const Color start = Color(0xFFC7102E); // #C7102E
+  static const Color middle = Color(0xFFE62746); // #E62746
+  static const Color end = Color(0xFFFF3152); // #FF3152
 
-  late Color gradientStart;
-  late Color gradientMiddle;
-  late Color gradientEnd;
+  static const LinearGradient primaryGradient = LinearGradient(
+    colors: [start, middle, end],
+    stops: [0.1707, 0.6937, 1.0], // Normalized stops (105.01% clamped to 1.0)
+    begin: Alignment.bottomLeft,
+    end: Alignment.topRight,
+  );
 
-  late LinearGradient primaryGradient;
-
-  Future<void> assignColor() async {
-    final colors = await ApiService().fetchData();
-    color_1 = colors['gradientStart'];
-    color_2 = colors['gradientMiddle'];
-    color_3 = colors['gradientEnd'];
-
-    gradientStart = hexToColor(color_1);
-    gradientMiddle = hexToColor(color_2);
-    gradientEnd = hexToColor(color_3);
-
-    primaryGradient = LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      stops: const [0.1707, 0.6937, 1.0501],
-      colors: [gradientStart, gradientMiddle, gradientEnd],
-    );
-  }
 
   // Static fallback colors
   static const Color primary = Color(0xFF6200EE);
@@ -53,7 +21,6 @@ class AppColors {
   static const Color textPrimary = Colors.black87;
   static const Color textSecondary = Colors.grey;
 }
-
 
 class AppTextStyles {
   static const TextStyle heading = TextStyle(

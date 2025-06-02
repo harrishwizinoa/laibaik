@@ -1,14 +1,55 @@
+// import 'package:get/get.dart';
+// import 'package:flutter/material.dart';
+//
+// class GetStartedController extends GetxController {
+//   var currentIndex = 0.obs;
+//   var showLanguageDropdown = false.obs;
+//   var selectedLanguage = 'English'.obs;
+//
+//   void updateIndex(int index) {
+//     currentIndex.value = index;
+//   }
+//
+//   void toggleLanguageDropdown() {
+//     showLanguageDropdown.value = !showLanguageDropdown.value;
+//   }
+//
+//   void selectLanguage(String language) {
+//     selectedLanguage.value = language;
+//     showLanguageDropdown.value = false;
+//     if (language == 'English') {
+//       Get.updateLocale(const Locale('en', 'US'));
+//     } else if (language == 'العربية') {
+//       Get.updateLocale(const Locale('ar', 'SA'));
+//     }
+//     update();
+//   }
+// }
 
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:flutter/material.dart';
 
 class GetStartedController extends GetxController {
   var currentIndex = 0.obs;
-  final titles = [
-    'Shop Online\nProducts',
-    'Fast Delivery of Delicious Food',
-    'Find the Professional Services',
-  ].obs;
+  var showLanguageDropdown = false.obs;
+  var selectedLanguage = 'English'.obs;
 
-  void updateIndex(int index) => currentIndex.value = index;
+  void updateIndex(int index) {
+    currentIndex.value = index;
+  }
+
+  void toggleLanguageDropdown() {
+    showLanguageDropdown.value = !showLanguageDropdown.value;
+  }
+
+  void selectLanguage(String language) {
+    selectedLanguage.value = language;
+    showLanguageDropdown.value = false;
+    if (language == 'English') {
+      Get.updateLocale(const Locale('en', 'US'));
+    } else if (language == 'العربية') {
+      Get.updateLocale(const Locale('ar', 'SA'));
+    }
+    update();
+  }
 }

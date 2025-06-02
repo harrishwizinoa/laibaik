@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:laibaik/users/widgets/curve_Edge.dart';
-import '../../main.dart';
+import '../../utils/themes.dart';
 import '../widgets/custom_shape.dart';
 
 class Categories extends StatelessWidget {
-  const Categories({super.key});
+   const Categories({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class Categories extends StatelessWidget {
             child:  Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                  gradient: colors.primaryGradient
+                  gradient: AppColors.primaryGradient
               ),
               child: SizedBox(
                 height: 400,
