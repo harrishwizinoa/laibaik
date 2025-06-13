@@ -320,7 +320,7 @@ class GetStarted extends StatelessWidget {
             }).toList(),
           ),
           Positioned(
-            top: 20,
+            top: 40,
             right: 20,
             child: Obx(() => Column(
               children: [
@@ -494,6 +494,7 @@ class GetStarted extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: isTablet ? 18 : 16,
                                 color: Colors.white,
+                                fontFamily: 'poppins-medium'
                               ),
                             ),
                           ),

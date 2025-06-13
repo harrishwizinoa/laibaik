@@ -67,11 +67,19 @@ class TranslationService extends Translations {
       'service_discount_50': 'Upto 50%',
       'new_tag': 'NEW',
       'coming_soon_tag': 'Coming soon',
-    },
-    'ar_SA': {
-      'welcome_title_1': 'مرحبًا بكم في ليبيك',
-      'welcome_title_2': 'استكشف ميزاتنا',
-      'welcome_title_3': 'انضم إلينا اليوم',
+      'select_contact_details': 'Select which contact details should we use to reset your password',
+        'via_email': 'via Email',
+        'via_whatsapp': 'via Whatsapp',
+        'whatsapp_error_message': 'We can\'t seem to find the right whatsapp number address for you, resend the whatsapp that you have registered',
+      'forget_password_title': 'Forget Password',
+      'code_sent': 'Code has been sent to +91 98*** ***21',
+      'resend_code': 'Resend code in 56s',
+
+      },
+      'ar_SA': {
+        'welcome_title_1': 'مرحبًا بكم في ليبيك',
+        'welcome_title_2': 'استكشف ميزاتنا',
+        'welcome_title_3': 'انضم إلينا اليوم',
       'discover_text': 'اكتشف العروض والخصومات الرائعة\nبين يديك',
       'get_started': 'ابدأ الآن',
       'nav_home': 'الرئيسية',
@@ -131,6 +139,13 @@ class TranslationService extends Translations {
       'service_discount_50': 'حتى 50%',
       'new_tag': 'جديد',
       'coming_soon_tag': 'قريبًا',
+      'select_contact_details': 'اختر تفاصيل الاتصال التي يجب أن نستخدمها\nلإعادة تعيين كلمة المرور الخاصة بك',
+      'via_email': 'عبر البريد الإلكتروني',
+      'via_whatsapp': 'عبر واتساب',
+      'whatsapp_error_message': 'لا يمكننا العثور على رقم واتساب الصحيح\nالخاص بك، أعد إرسال رقم واتساب الذي قمت\nبتسجيله',
+        'forget_password_title': 'نسيت كلمة المرور',
+        'code_sent': 'تم إرسال الرمز إلى +91 98*** ***21',
+        'resend_code': 'إعادة إرسال الرمز بعد 56 ثانية',
     },
   };
 }

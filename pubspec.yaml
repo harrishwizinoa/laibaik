@@ -41,7 +41,10 @@ dependencies:
   smooth_page_indicator:
   get:
   dio:
-
+  pinput:
+  animated_segmented_tab_control:
+  shimmer:
+  cached_network_image:
 
 dev_dependencies:
   flutter_test:

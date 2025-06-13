@@ -53,3 +53,9 @@ class GetStartedController extends GetxController {
     update();
   }
 }
+
+class valueController extends GetxController {
+
+
+  var isLoading = false.obs;
+}

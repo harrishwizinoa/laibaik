@@ -115,18 +115,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:laibaik/modules/controller/controller.dart';
+
 import 'package:laibaik/translation.dart';
 import 'package:laibaik/users/screens/categories.dart';
+import 'package:laibaik/users/screens/categories/food_and_grocery.dart';
 import 'package:laibaik/users/screens/home_screen.dart';
 import 'package:laibaik/utils/themes.dart';
-
 
 import 'Auth/get_started.dart';
 
 void main() {
+  Get.put(valueController());
   runApp(const MyApp());
 }
-
+final valueController vController = Get.put(valueController());
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -139,6 +142,29 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en', 'US'), // Fallback locale
       home: const GetStarted(),
       debugShowCheckedModeBanner: false,
+      builder: (context, child) {
+        return Obx(
+              () => Stack(
+            children: [
+              child!,
+              if (vController.isLoading.value)
+                Positioned.fill(
+                  child: Container(
+                    color: Colors.black.withOpacity(0.5),
+                    child: const Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CircularProgressIndicator(color: Colors.red),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

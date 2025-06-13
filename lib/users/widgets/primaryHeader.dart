@@ -16,7 +16,7 @@ class primaryHeader extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _primaryHeaderState extends State<primaryHeader> {
-  int currentIndex = 0;
+  int currentIndex = 0;  
   List<String>imageUrls = [
     "assets/images/banner.png",
     "assets/images/banner1.png",

@@ -1,245 +1,10 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:get/get_core/src/get_main.dart';
-// import 'package:laibaik/main.dart';
-//
-// class ProfileForm extends StatefulWidget {
-//   @override
-//   _ProfileFormState createState() => _ProfileFormState();
-// }
-//
-// class _ProfileFormState extends State<ProfileForm> {
-//   bool _rememberMe = false;
-//   String _selectedGender = 'Male';
-//   TextEditingController _dobController = TextEditingController();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Stack(
-//         children: [
-//           Container(
-//             decoration: BoxDecoration(
-//               image: DecorationImage(
-//                 image: AssetImage('assets/images/background.jpg'),
-//                 fit: BoxFit.cover,
-//               ),
-//             ),
-//           ),
-//           Padding(
-//             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-//             child: Column(
-//               mainAxisAlignment: MainAxisAlignment.end,
-//               children: [
-//                 Text(
-//                   'Fill your profile',
-//                   style: TextStyle(
-//                     fontSize: 28,
-//                     fontWeight: FontWeight.bold,
-//                     color: Colors.white,
-//                   ),
-//                 ),
-//                 SizedBox(height: 30),
-//                 Container(
-//                   padding: EdgeInsets.all(20),
-//                   decoration: BoxDecoration(
-//                     gradient: LinearGradient(
-//                       begin: Alignment.topLeft,
-//                       end: Alignment.bottomRight,
-//                       colors: [Colors.black, Colors.white38],
-//                     ),
-//                     color: Colors.black.withOpacity(0.7),
-//                     borderRadius: BorderRadius.circular(15),
-//                     border: Border.all(color: Colors.white38, width: 2),
-//                   ),
-//                   child: Column(
-//                     children: [
-//                       Container(
-//                         decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(10),
-//                           color: Colors.white,
-//                         ),
-//                         child: TextField(
-//                           decoration: InputDecoration(
-//                             prefixIcon: Icon(Icons.person),
-//                             hintText: 'First Name',
-//                             border: OutlineInputBorder(
-//                               borderRadius: BorderRadius.circular(10),
-//                             ),
-//                           ),
-//                         ),
-//                       ),
-//                       SizedBox(height: 15),
-//                       Container(
-//                         decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(10),
-//                           color: Colors.white,
-//                         ),
-//                         child: TextField(
-//                           decoration: InputDecoration(
-//                             prefixIcon: Icon(Icons.person_outline),
-//                             hintText: 'Last Name',
-//                             border: OutlineInputBorder(
-//                               borderRadius: BorderRadius.circular(10),
-//                             ),
-//                           ),
-//                         ),
-//                       ),
-//                       SizedBox(height: 15),
-//                       Container(
-//                         decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(10),
-//                           color: Colors.white,
-//                         ),
-//                         child: TextField(
-//                           controller: _dobController,
-//                           decoration: InputDecoration(
-//                             prefixIcon: Icon(Icons.calendar_today),
-//                             hintText: 'Date of Birth (MM/DD/YYYY)',
-//                             border: OutlineInputBorder(
-//                               borderRadius: BorderRadius.circular(10),
-//                             ),
-//                           ),
-//                           onTap: () async {
-//                             DateTime? pickedDate = await showDatePicker(
-//                               context: context,
-//                               initialDate: DateTime.now(),
-//                               firstDate: DateTime(1900),
-//                               lastDate: DateTime.now(),
-//                             );
-//                             if (pickedDate != null) {
-//                               setState(() {
-//                                 _dobController.text =
-//                                 "${pickedDate.month}/${pickedDate.day}/${pickedDate.year}";
-//                               });
-//                             }
-//                           },
-//                         ),
-//                       ),
-//                       SizedBox(height: 15),
-//                       Container(
-//                         height: 50,
-//                         child: Row(
-//                           children: [
-//                             Expanded(
-//                               child: RadioListTile<String>(
-//                                 value: 'Male',
-//                                 activeColor: Colors.white,
-//                                 groupValue: _selectedGender,
-//                                 onChanged: (value) {
-//                                   setState(() {
-//                                     _selectedGender = value!;
-//                                   });
-//                                 },
-//                                 title: Text('Male',style: TextStyle(color: Colors.white),),
-//                                 //secondary: Icon(Icons.male),
-//                               ),
-//                             ),
-//                             Expanded(
-//                               child: RadioListTile<String>(
-//                                 value: 'Female',
-//                                  activeColor: Colors.white,
-//                                 groupValue: _selectedGender,
-//                                 onChanged: (value) {
-//                                   setState(() {
-//                                     _selectedGender = value!;
-//                                   });
-//                                 },
-//                                 title: Text('Female',style: TextStyle(color: Colors.white),),
-//                                 //secondary: Icon(Icons.female),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                       ),
-//                       SizedBox(height: 15),
-//                       Container(
-//                         decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(10),
-//                           color: Colors.white,
-//                         ),
-//                         child: TextField(
-//                           decoration: InputDecoration(
-//                             prefixIcon: Icon(Icons.email),
-//                             hintText: 'Email',
-//                             border: OutlineInputBorder(
-//                               borderRadius: BorderRadius.circular(10),
-//                             ),
-//                           ),
-//                         ),
-//                       ),
-//                       SizedBox(height: 15),
-//                       Container(
-//                         decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(10),
-//                           color: Colors.white,
-//                         ),
-//                         child: TextField(
-//                           decoration: InputDecoration(
-//                             prefixIcon: Icon(Icons.phone),
-//                             hintText: 'Phone Number',
-//                             border: OutlineInputBorder(
-//                               borderRadius: BorderRadius.circular(10),
-//                             ),
-//                           ),
-//                           keyboardType: TextInputType.phone,
-//                         ),
-//                       ),
-//                       SizedBox(height: 15),
-//                       Row(
-//                         children: [
-//                           Checkbox(
-//                             value: _rememberMe,
-//                             onChanged: (value) {
-//                               setState(() {
-//                                 _rememberMe = value!;
-//                               });
-//                             },
-//                             side: BorderSide(color: Colors.white),
-//                           ),
-//                           Text(
-//                             'Yes I Love to recieve offers and discounts',
-//                             style: TextStyle(color: Colors.white,fontSize: 12),
-//                           ),
-//                         ],
-//                       ),
-//                       SizedBox(height: 15),
-//                       ElevatedButton(
-//                         onPressed: () {
-//                           Get.to(BottomNav());
-//                         },
-//                         style: ElevatedButton.styleFrom(
-//                           backgroundColor: Colors.red,
-//                           minimumSize: Size(double.infinity, 50),
-//                           shape: RoundedRectangleBorder(
-//                             borderRadius: BorderRadius.circular(10),
-//                           ),
-//                         ),
-//                         child: Text(
-//                           'continue',
-//                           style: TextStyle(
-//                             color: Colors.white,
-//                             fontSize: 16,
-//                             fontWeight: FontWeight.bold,
-//                           ),
-//                         ),
-//                       ),
-//                       SizedBox(height: 20),
-//                     ],
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:laibaik/main.dart';
+import 'package:laibaik/users/widgets/curve_Edge.dart';
+
+import '../utils/themes.dart';
 
 class ProfileForm extends StatefulWidget {
   const ProfileForm({super.key});
@@ -256,218 +21,255 @@ class _ProfileFormState extends State<ProfileForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      backgroundColor: Color(0xffF5F5F5),
+      body: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/background.jpg'),
-                fit: BoxFit.cover,
+      CurveEdge(
+      child: Container(
+      height: 230,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            gradient: AppColors.primaryGradient
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 50,),
+            Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Icon(Icons.arrow_back,color: Colors.white,),
+            ),
+            SizedBox(height: 5,),
+            Center(
+              child: SvgPicture.asset(
+                'assets/images/labbaik.svg',
+                height: 50,
+                width: 50,
               ),
             ),
+            SizedBox(height: 30,),
+          ],
+        ),
           ),
+      ),
+          Text(
+            'fill_your_profile'.tr,
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+                fontFamily: 'poppins-medium'
+            ),
+          ),
+          // SizedBox(height: 20),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 14,vertical: 8),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'fill_your_profile'.tr,
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
                   ),
-                ),
-                SizedBox(height: 30),
-                Container(
-                  padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Colors.black, Colors.white38],
+                  child: TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person),
+                      hintText: 'first_name'.tr,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 0.5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 0.5),
+                      ),
                     ),
-                    color: Colors.black.withOpacity(0.7),
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.white38, width: 2),
                   ),
-                  child: Column(
+                ),
+                SizedBox(height: 15),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person_outline),
+                      hintText: 'last_name'.tr,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 0.5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 0.5),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: TextField(
+                    controller: _dobController,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.calendar_today),
+                      hintText: 'date_of_birth'.tr,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 0.5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 0.5),
+                      ),
+                    ),
+                    onTap: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                      );
+                      if (pickedDate != null) {
+                        setState(() {
+                          _dobController.text =
+                          "${pickedDate.month}/${pickedDate.day}/${pickedDate.year}";
+                        });
+                      }
+                    },
+                  ),
+                ),
+                SizedBox(height: 15),
+                Text("Gender (Optional)",style: TextStyle(fontWeight: FontWeight.bold,fontFamily: 'poppins-medium'),),
+                SizedBox(height: 7),
+                Container(
+                  height: 50,
+                  child: Row(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.person),
-                            hintText: 'first_name'.tr,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.person_outline),
-                            hintText: 'last_name'.tr,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                        ),
-                        child: TextField(
-                          controller: _dobController,
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.calendar_today),
-                            hintText: 'date_of_birth'.tr,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          onTap: () async {
-                            DateTime? pickedDate = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime(1900),
-                              lastDate: DateTime.now(),
-                            );
-                            if (pickedDate != null) {
-                              setState(() {
-                                _dobController.text =
-                                "${pickedDate.month}/${pickedDate.day}/${pickedDate.year}";
-                              });
-                            }
+                      Expanded(
+                        child: RadioListTile<String>(
+                          value: 'Male',
+                          activeColor: Colors.black,
+                          groupValue: _selectedGender,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedGender = value!;
+                            });
                           },
+                          title: Text('male'.tr, style: TextStyle(color: Colors.black)),
                         ),
                       ),
-                      SizedBox(height: 15),
-                      Container(
-                        height: 50,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: RadioListTile<String>(
-                                value: 'Male',
-                                activeColor: Colors.white,
-                                groupValue: _selectedGender,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _selectedGender = value!;
-                                  });
-                                },
-                                title: Text('male'.tr, style: TextStyle(color: Colors.white)),
-                              ),
-                            ),
-                            Expanded(
-                              child: RadioListTile<String>(
-                                value: 'Female',
-                                activeColor: Colors.white,
-                                groupValue: _selectedGender,
-                                onChanged: (value) {
-                                  setState(() {
-                                    _selectedGender = value!;
-                                  });
-                                },
-                                title: Text('female'.tr, style: TextStyle(color: Colors.white)),
-                              ),
-                            ),
-                          ],
+                      Expanded(
+                        child: RadioListTile<String>(
+                          value: 'Female',
+                          activeColor: Colors.black,
+                          groupValue: _selectedGender,
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedGender = value!;
+                            });
+                          },
+                          title: Text('female'.tr, style: TextStyle(color: Colors.black)),
                         ),
                       ),
-                      SizedBox(height: 15),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.email),
-                            hintText: 'email'.tr,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.white,
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.phone),
-                            hintText: 'phone_number'.tr,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          keyboardType: TextInputType.phone,
-                        ),
-                      ),
-                      SizedBox(height: 15),
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: _rememberMe,
-                            onChanged: (value) {
-                              setState(() {
-                                _rememberMe = value!;
-                              });
-                            },
-                            side: BorderSide(color: Colors.white),
-                          ),
-                          Text(
-                            'receive_offers'.tr,
-                            style: TextStyle(color: Colors.white, fontSize: 12),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      ElevatedButton(
-                        onPressed: () {
-                          Get.to(const BottomNav());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.red,
-                          minimumSize: Size(double.infinity, 50),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        child: Text(
-                          'continue'.tr,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20),
                     ],
                   ),
                 ),
+                SizedBox(height: 15),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock),
+                      hintText: 'password'.tr,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 0.5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 0.5),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 15),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.phone),
+                      hintText: 'phone_number'.tr,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 0.5),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Color(0xFFE6E6E6), width: 0.5),
+                      ),
+                    ),
+                    keyboardType: TextInputType.phone,
+                  ),
+                ),
+                SizedBox(height: 15),
+                Row(
+                  children: [
+                    Checkbox(
+                      value: _rememberMe,
+                      onChanged: (value) {
+                        setState(() {
+                          _rememberMe = value!;
+                        });
+                      },
+                      side: BorderSide(color: Colors.black,width: 2),
+                    ),
+                    Text(
+                      'receive_offers'.tr,
+                      style: TextStyle(color: Colors.black, fontSize: 12,fontWeight: FontWeight.bold,fontFamily: 'poppins-medium'),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 15),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(BottomNav());
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: AppColors.primaryGradient,
+                    ),
+                    width: double.infinity,
+                    height: 50,
+                    child: Center(
+                      child: Text(
+                        'continue'.tr,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                            fontFamily: 'poppins-medium'
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20),
               ],
-            ),
+            )
+
           ),
         ],
       ),
