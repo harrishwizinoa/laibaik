@@ -119,7 +119,8 @@ import 'package:laibaik/modules/controller/controller.dart';
 
 import 'package:laibaik/translation.dart';
 import 'package:laibaik/users/screens/categories.dart';
-import 'package:laibaik/users/screens/categories/food_and_grocery.dart';
+import 'package:laibaik/users/screens/categories/FoodAndgrocery/food_and_grocery.dart';
+import 'package:laibaik/users/screens/categories/FoodAndgrocery/viewHotel.dart';
 import 'package:laibaik/users/screens/home_screen.dart';
 import 'package:laibaik/utils/themes.dart';
 
@@ -127,6 +128,7 @@ import 'Auth/get_started.dart';
 
 void main() {
   Get.put(valueController());
+  //runApp(BottomNav());
   runApp(const MyApp());
 }
 final valueController vController = Get.put(valueController());
@@ -182,7 +184,8 @@ class _BottomNavState extends State<BottomNav> {
   static final List<Widget> _pages = <Widget>[
     const HomePage(),
     const Categories(),
-    Center(child: Text('nav_order'.tr)),
+    Viewhotel(),
+    // Center(child: Text('nav_order'.tr)),
     Center(child: Text('nav_offer_zone'.tr)),
     Center(child: Text('nav_favorites'.tr)),
   ];

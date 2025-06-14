@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:laibaik/utils/themes.dart';
 
-import '../../screens/categories/food_and_grocery.dart';
+import '../../screens/categories/FoodAndgrocery/food_and_grocery.dart';
 
 
 

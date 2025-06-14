@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
               pinned: true,
               floating: false,
               delegate: StickyHeaderDelegate(
-                minHeight: 150,
+                minHeight: 220,
                 maxHeight: 320,
               ),
             ),
@@ -220,7 +220,7 @@ class StickyHeaderDelegate extends SliverPersistentHeaderDelegate {
   final double maxHeight;
 
   StickyHeaderDelegate({
-    this.minHeight = 135,
+    this.minHeight = 225,
     this.maxHeight = 320,
   });
 
@@ -238,8 +238,10 @@ class StickyHeaderDelegate extends SliverPersistentHeaderDelegate {
     final double titleFontSize = lerpDouble(22, 16, progress)!;
     final double subtitleFontSize = lerpDouble(14, 10, progress)!;
     final double searchBarHeight = lerpDouble(50, 40, progress)!;
-    final double paddingTop = lerpDouble(40, 10, progress)!;
+    //final double paddingTop = lerpDouble(40, 10, progress)!;
     final double spacing = lerpDouble(16, 8, progress)!;
+    final double systemTopPadding = MediaQuery.of(context).padding.top;
+    final double paddingTop = systemTopPadding + lerpDouble(24, 10, progress)!;
 
     return CurveEdge(
       child: Container(

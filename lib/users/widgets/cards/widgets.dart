@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import '../../../utils/themes.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SectionHeader extends StatelessWidget {
   final String title;
@@ -141,6 +142,35 @@ class _CardWidgetState extends State<CardWidget> {
                   ),
                 ),
                 Positioned(
+                  bottom: 0,
+                  child: Container(
+                    height: 50,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withOpacity(0.9),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                    top: 8,
+                    left: 8,
+                    child:Container(
+                      height: 35,
+                      width: 35,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(image: NetworkImage(widget.data['logo'] ?? ''),fit: BoxFit.cover),
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                      ),
+                    ) ),
+                Positioned(
                   top: 8,
                   right: 8,
                   child: GestureDetector(
@@ -260,14 +290,43 @@ class _CardWidgetState extends State<CardWidget> {
                     height: 130,
                     width: 180,
                     decoration: BoxDecoration(
-                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
                         image: NetworkImage(widget.data['image'] ?? ''),
                         fit: BoxFit.cover,
                       ),
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
                     ),
                   ),
+                  Positioned(
+                    bottom: 0,
+                    child: Container(
+                      height: 100,
+                      width: 180,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Colors.transparent,
+                            Colors.black.withOpacity(0.9),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                      top: 8,
+                      left: 8,
+                      child:Container(
+                        height: 45,
+                        width: 45,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(image: NetworkImage(widget.data['logo'] ?? ''),fit: BoxFit.cover),
+                          borderRadius: BorderRadius.all(Radius.circular(10))
+                        ),
+                  ) ),
+
                   Positioned(
                     top: 8,
                     right: 16,
@@ -280,6 +339,7 @@ class _CardWidgetState extends State<CardWidget> {
                       ),
                     ),
                   ),
+
                   Positioned(
                     left: 14,
                     bottom: 10,
@@ -308,6 +368,7 @@ class _CardWidgetState extends State<CardWidget> {
                       ),
                     ),
                   ),
+
                 ],
               ),
             ),
@@ -405,3 +466,4 @@ class _CardWidgetState extends State<CardWidget> {
     );
   }
 }
+
