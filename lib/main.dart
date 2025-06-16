@@ -184,8 +184,8 @@ class _BottomNavState extends State<BottomNav> {
   static final List<Widget> _pages = <Widget>[
     const HomePage(),
     const Categories(),
-    Viewhotel(),
-    // Center(child: Text('nav_order'.tr)),
+    //Viewhotel(restaurantData: {},),
+     Center(child: Text('nav_order'.tr)),
     Center(child: Text('nav_offer_zone'.tr)),
     Center(child: Text('nav_favorites'.tr)),
   ];

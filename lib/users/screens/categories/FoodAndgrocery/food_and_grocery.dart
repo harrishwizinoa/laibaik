@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:laibaik/apiservice.dart';
+import 'package:laibaik/users/screens/categories/FoodAndgrocery/viewHotel.dart';
 import 'package:laibaik/users/widgets/curve_Edge.dart';
 import 'package:laibaik/utils/themes.dart';
 
@@ -264,7 +265,95 @@ class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(covariant StickyTabBarDelegate oldDelegate) => tabController != oldDelegate.tabController;
 }
 
-
+//
+// class Food extends StatelessWidget {
+//   final List<dynamic> foodData;
+//   final List<dynamic> mindData;
+//   final List<dynamic> bannerData;
+//   final List<dynamic> AllRestaurant;
+//
+//   const Food({
+//     super.key,
+//     required this.foodData,
+//     required this.mindData,
+//     required this.bannerData,
+//     required this.AllRestaurant,
+//   });
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         SectionHeader(title: "Top Most Restaurant", onSeeAll: (){}),
+//         SizedBox(
+//           height: 220,
+//           child: ListView.builder(
+//             scrollDirection: Axis.horizontal,
+//             physics: const ClampingScrollPhysics(),
+//             itemCount: foodData.length,
+//             itemBuilder: (context, index) => Padding(
+//               padding: const EdgeInsets.symmetric(horizontal: 8.0),
+//               child: CardWidget(data: foodData[index], cardType: 'food'),
+//             ),
+//           ),
+//         ),
+//         SectionHeader(title: "What Your Mind ?", onSeeAll: (){}),
+//         SizedBox(
+//           height: 120,
+//           child: ListView.builder(
+//             scrollDirection: Axis.horizontal,
+//             physics: const ClampingScrollPhysics(),
+//             itemCount: mindData.length,
+//             itemBuilder: (context, index) => Padding(
+//               padding: const EdgeInsets.symmetric(horizontal: 4.0),
+//               child: CardWidget(data: mindData[index], cardType: 'mind'),
+//             ),
+//           ),
+//         ),
+//         const SizedBox(height: 16),
+//         Carousel(bannerData: bannerData),
+//         const SectionHeader(title: "More on labbaik", onSeeAll: null),
+//         Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//           children: [
+//             MoreCard(
+//               title: "OFFER\nZONE",
+//               image: "assets/images/3moreOn.png",
+//               imageSize: 70,
+//             ),
+//             MoreCard(
+//               title: "DEAL OF THE\nDAY",
+//               image: "assets/images/2moreOn.png",
+//               imageSize: 50,
+//             ),
+//             MoreCard(
+//               title: "NEW\nARRIVAL",
+//               image: "assets/images/1moreOn.png",
+//               imageSize: 70,
+//             ),
+//           ],
+//         ),
+//         const SizedBox(height: 20),
+//         const SizedBox(height: 30, child: Placeholder()),
+//         const SizedBox(height: 20),
+//         // Add _allCard items using ListView.builder instead of SliverList
+//         if (foodData.isNotEmpty) ...[
+//           const SectionHeader(title: "All Restaurants", onSeeAll: null),
+//           ListView.builder(
+//             shrinkWrap: true, // Important for Column compatibility
+//             physics: const NeverScrollableScrollPhysics(), // Disable inner scrolling, let CustomScrollView handle it
+//             itemCount: AllRestaurant.length,
+//             itemBuilder: (context, index) => Padding(
+//               padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
+//               child: CardWidget(data: AllRestaurant[index], cardType: 'all'),
+//             ),
+//           ),
+//         ],
+//       ],
+//     );
+//   }
+// }
 class Food extends StatelessWidget {
   final List<dynamic> foodData;
   final List<dynamic> mindData;
@@ -284,7 +373,7 @@ class Food extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SectionHeader(title: "Top Most Restaurant", onSeeAll: (){}),
+        SectionHeader(title: "Top Most Restaurant", onSeeAll: () {}),
         SizedBox(
           height: 220,
           child: ListView.builder(
@@ -293,11 +382,22 @@ class Food extends StatelessWidget {
             itemCount: foodData.length,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: CardWidget(data: foodData[index], cardType: 'food'),
+              child: CardWidget(
+                data: foodData[index] as Map<String, dynamic>,
+                cardType: 'food',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Viewhotel(restaurantData: foodData[index]),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),
-        SectionHeader(title: "What Your Mind ?", onSeeAll: (){}),
+        SectionHeader(title: "What Your Mind ?", onSeeAll: () {}),
         SizedBox(
           height: 120,
           child: ListView.builder(
@@ -306,7 +406,10 @@ class Food extends StatelessWidget {
             itemCount: mindData.length,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
-              child: CardWidget(data: mindData[index], cardType: 'mind'),
+              child: CardWidget(
+                data: mindData[index] as Map<String, dynamic>,
+                cardType: 'mind',
+              ),
             ),
           ),
         ),
@@ -336,16 +439,26 @@ class Food extends StatelessWidget {
         const SizedBox(height: 20),
         const SizedBox(height: 30, child: Placeholder()),
         const SizedBox(height: 20),
-        // Add _allCard items using ListView.builder instead of SliverList
         if (foodData.isNotEmpty) ...[
           const SectionHeader(title: "All Restaurants", onSeeAll: null),
           ListView.builder(
-            shrinkWrap: true, // Important for Column compatibility
-            physics: const NeverScrollableScrollPhysics(), // Disable inner scrolling, let CustomScrollView handle it
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: AllRestaurant.length,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
-              child: CardWidget(data: AllRestaurant[index], cardType: 'all'),
+              child: CardWidget(
+                data: AllRestaurant[index] as Map<String, dynamic>,
+                cardType: 'all',
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Viewhotel(restaurantData: AllRestaurant[index]),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],

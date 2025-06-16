@@ -4,53 +4,27 @@ import '../../../../utils/themes.dart';
 import '../../../widgets/cards/widgets.dart';
 
 class Viewhotel extends StatefulWidget {
-  const Viewhotel({super.key});
+  final Map<String, dynamic> restaurantData; // Accept restaurant data
+
+  const Viewhotel({super.key, required this.restaurantData});
 
   @override
   State<Viewhotel> createState() => _ViewhotelState();
 }
 
 class _ViewhotelState extends State<Viewhotel> {
-  final ScrollController _scrollController = ScrollController();
-  bool _showSafeArea = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(() {
-      if (_scrollController.offset > 25 && _showSafeArea) {
-        setState(() {
-          _showSafeArea = false;
-        });
-      }
-      else if (_scrollController.offset <= 25 && !_showSafeArea) {
-        setState(() {
-          _showSafeArea = true;
-        });
-      }
-      print(_scrollController.offset);
-      print(_showSafeArea);
-    });
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    List<dynamic> TopViewData = [
-      "assets/images/china.png",
-      "assets/images/china.png",
-      "assets/images/china.png",
-      "assets/images/china.png",
+    final data = widget.restaurantData;
+    // Sample top view data (replace with actual menu items or featured dishes if available)
+    List<Map<String, dynamic>> topViewData = (data['menuItems'] as List<dynamic>?)?.cast<Map<String, dynamic>>() ?? [
+      {'image': data['image'] ?? "assets/images/china.png", 'name': 'Dish 1', 'discount': 'No discount', 'maxDiscount': 'N/A'},
+      {'image': data['image'] ?? "assets/images/china.png", 'name': 'Dish 2', 'discount': 'No discount', 'maxDiscount': 'N/A'},
+      {'image': data['image'] ?? "assets/images/china.png", 'name': 'Dish 3', 'discount': 'No discount', 'maxDiscount': 'N/A'},
     ];
 
-    Widget content = Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
-        controller: _scrollController,
         child: Column(
           children: [
             Stack(
@@ -73,7 +47,7 @@ class _ViewhotelState extends State<Viewhotel> {
                   child: Row(
                     children: [
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () => Navigator.pop(context),
                         child: const Icon(
                           Icons.arrow_back,
                           color: Colors.white,
@@ -91,29 +65,29 @@ class _ViewhotelState extends State<Viewhotel> {
                           ),
                           child: Row(
                             children: [
-                              Spacer(),
+                              const Spacer(),
                               const Icon(
                                 Icons.person_add_alt_1,
                                 color: Colors.white,
                                 size: 14,
                               ),
-                              Spacer(),
-                              Text(
+                              const Spacer(),
+                              const Text(
                                 "Group Order",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 10,
                                   fontFamily: "poppins",
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              Spacer(),
+                              const Spacer(),
                             ],
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
-                      Icon(Icons.more_vert, color: Colors.white),
+                      const SizedBox(width: 10),
+                      const Icon(Icons.more_vert, color: Colors.white),
                     ],
                   ),
                 ),
@@ -142,9 +116,7 @@ class _ViewhotelState extends State<Viewhotel> {
                                 width: 80,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage(
-                                      "assets/images/china.png",
-                                    ),
+                                    image: NetworkImage(data['logo'] ?? data['image'] ?? "assets/images/china.png"),
                                     fit: BoxFit.cover,
                                   ),
                                   borderRadius: BorderRadius.circular(10),
@@ -159,50 +131,50 @@ class _ViewhotelState extends State<Viewhotel> {
                                   Row(
                                     children: [
                                       Text(
-                                        "hotel name",
-                                        style: TextStyle(
+                                        data['name'] ?? "Unknown Hotel",
+                                        style: const TextStyle(
                                           fontSize: 18,
                                           fontFamily: "poppins-bold",
                                         ),
                                       ),
-                                      SizedBox(width: 100),
+                                      const SizedBox(width: 50),
                                       SvgPicture.asset(
                                         "assets/icons/like.svg",
                                         width: 20,
                                         height: 20,
                                       ),
-                                      SizedBox(width: 5),
+                                      const SizedBox(width: 5),
                                       Image.asset("assets/icons/info.png"),
                                     ],
                                   ),
-                                  SizedBox(height: 4),
+                                  const SizedBox(height: 4),
                                   Text(
-                                    "chinese,arabian",
-                                    style: TextStyle(
+                                    data['cuisine'] ?? "N/A",
+                                    style: const TextStyle(
                                       fontSize: 12,
                                       fontFamily: "poppins",
                                     ),
                                   ),
-                                  SizedBox(height: 4),
+                                  const SizedBox(height: 4),
                                   Row(
                                     children: [
                                       SvgPicture.asset(
-                                        "assets/icons/5star.svg",
+                                        _getStarIcon(double.tryParse(data['rating']?.toString() ?? '0.0') ?? 0.0),
                                         width: 20,
                                         height: 20,
                                       ),
-                                      SizedBox(width: 5),
+                                      const SizedBox(width: 5),
                                       Text(
-                                        "4.5",
-                                        style: TextStyle(
+                                        data['rating']?.toString() ?? "N/A",
+                                        style: const TextStyle(
                                           fontSize: 14,
                                           fontFamily: "poppins-bold",
                                         ),
                                       ),
-                                      SizedBox(width: 5),
+                                      const SizedBox(width: 5),
                                       Text(
-                                        "See 12 Reviews",
-                                        style: TextStyle(
+                                        "See ${data['reviews'] ?? 0} Reviews",
+                                        style: const TextStyle(
                                           fontFamily: "poppins",
                                           color: Colors.green,
                                         ),
@@ -214,39 +186,39 @@ class _ViewhotelState extends State<Viewhotel> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Row(
                           children: [
-                            Spacer(),
+                            const Spacer(),
                             SvgPicture.asset("assets/icons/clock.svg"),
-                            SizedBox(width: 2),
+                            const SizedBox(width: 2),
                             Text(
-                              "20-30 mins",
-                              style: TextStyle(fontFamily: "poppins-bold"),
+                              data['time'] ?? "20-30 mins",
+                              style: const TextStyle(fontFamily: "poppins-bold"),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Container(
                               width: 2,
                               height: 30,
-                              color: Color(0XFFF1F0F5),
+                              color: const Color(0XFFF1F0F5),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             SvgPicture.asset("assets/icons/delivary.svg"),
-                            SizedBox(width: 2),
+                            const SizedBox(width: 2),
                             Text(
-                              "OMR 0.3584",
-                              style: TextStyle(fontFamily: "poppins-bold"),
+                              data['freeDelivery'] == true ? "Free Delivery" : "OMR ${data['deliveryPrice'] ?? '0.3584'}",
+                              style: const TextStyle(fontFamily: "poppins-bold"),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Container(
                               width: 2,
                               height: 30,
-                              color: Color(0XFFF1F0F5),
+                              color: const Color(0XFFF1F0F5),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Column(
                               children: [
-                                Text(
+                                const Text(
                                   "Delivered By",
                                   style: TextStyle(
                                     fontSize: 12,
@@ -256,16 +228,9 @@ class _ViewhotelState extends State<Viewhotel> {
                                 Row(
                                   children: [
                                     ShaderMask(
-                                      shaderCallback:
-                                          (bounds) => AppColors.primaryGradient
-                                              .createShader(
-                                                Rect.fromLTWH(
-                                                  0,
-                                                  0,
-                                                  bounds.width,
-                                                  bounds.height,
-                                                ),
-                                              ),
+                                      shaderCallback: (bounds) => AppColors.primaryGradient.createShader(
+                                        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+                                      ),
                                       child: const Text(
                                         'Labbaik',
                                         style: TextStyle(
@@ -276,7 +241,7 @@ class _ViewhotelState extends State<Viewhotel> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 2),
+                                    const SizedBox(width: 2),
                                     Image.asset(
                                       "assets/icons/info.png",
                                       width: 15,
@@ -286,20 +251,19 @@ class _ViewhotelState extends State<Viewhotel> {
                                 ),
                               ],
                             ),
-                            Spacer(),
+                            const Spacer(),
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Container(
                             height: 40,
                             width: double.infinity,
-                            decoration: BoxDecoration(
-                              gradient: const LinearGradient(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
                                 begin: Alignment.centerRight,
                                 end: Alignment.centerLeft,
-                                // 270 degrees = right to left
                                 colors: [
                                   Color(0xFFFEE4E5),
                                   Color.fromRGBO(254, 228, 229, 0.5),
@@ -312,14 +276,12 @@ class _ViewhotelState extends State<Viewhotel> {
                             ),
                             child: Center(
                               child: ShaderMask(
-                                shaderCallback:
-                                    (bounds) => AppColors.primaryGradient
-                                        .createShader(bounds),
+                                shaderCallback: (bounds) => AppColors.primaryGradient.createShader(bounds),
                                 blendMode: BlendMode.srcIn,
                                 child: RichText(
                                   text: TextSpan(
                                     children: [
-                                      TextSpan(
+                                      const TextSpan(
                                         text: "Genie ",
                                         style: TextStyle(
                                           fontSize: 16,
@@ -327,9 +289,8 @@ class _ViewhotelState extends State<Viewhotel> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            "Extra 10% off above \$400 + Free Delivary",
-                                        style: TextStyle(
+                                        text: "Extra ${data['discount'] ?? '10%'} off above OMR ${data['minOrder'] ?? 400} + ${data['freeDelivery'] == true ? 'Free Delivery' : 'Standard Delivery'}",
+                                        style: const TextStyle(
                                           fontSize: 12,
                                           fontFamily: "poppins-medium",
                                         ),
@@ -366,7 +327,6 @@ class _ViewhotelState extends State<Viewhotel> {
                               gradient: const LinearGradient(
                                 begin: Alignment.centerRight,
                                 end: Alignment.centerLeft,
-                                // 270 degrees = right to left
                                 colors: [
                                   Color(0xFFFEE4E5),
                                   Color.fromRGBO(254, 228, 229, 0.5),
@@ -379,7 +339,7 @@ class _ViewhotelState extends State<Viewhotel> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 5),
+                      const SizedBox(width: 5),
                       Container(
                         height: 50,
                         width: 300,
@@ -395,7 +355,6 @@ class _ViewhotelState extends State<Viewhotel> {
                               gradient: const LinearGradient(
                                 begin: Alignment.centerRight,
                                 end: Alignment.centerLeft,
-                                // 270 degrees = right to left
                                 colors: [
                                   Color(0xFFFEE4E5),
                                   Color.fromRGBO(254, 228, 229, 0.5),
@@ -404,12 +363,10 @@ class _ViewhotelState extends State<Viewhotel> {
                             ),
                             child: Center(
                               child: ShaderMask(
-                                shaderCallback:
-                                    (bounds) => AppColors.primaryGradient
-                                        .createShader(bounds),
+                                shaderCallback: (bounds) => AppColors.primaryGradient.createShader(bounds),
                                 blendMode: BlendMode.srcIn,
                                 child: RichText(
-                                  text: TextSpan(
+                                  text: const TextSpan(
                                     children: [
                                       TextSpan(
                                         text: "Active ",
@@ -439,7 +396,7 @@ class _ViewhotelState extends State<Viewhotel> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
@@ -451,7 +408,7 @@ class _ViewhotelState extends State<Viewhotel> {
                 ),
                 child: Row(
                   children: [
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     SvgPicture.asset(
                       "assets/icons/discount.svg",
                       height: 40,
@@ -461,14 +418,14 @@ class _ViewhotelState extends State<Viewhotel> {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: "Items at OMR 0.380\n",
-                            style: TextStyle(
+                            text: "Items at OMR ${data['itemPrice'] ?? '0.380'}\n",
+                            style: const TextStyle(
                               fontFamily: "poppins-bold",
                               fontSize: 14,
                               color: Colors.black,
                             ),
                           ),
-                          TextSpan(
+                          const TextSpan(
                             text: "on selected items",
                             style: TextStyle(
                               fontFamily: "poppins-medium",
@@ -479,9 +436,9 @@ class _ViewhotelState extends State<Viewhotel> {
                         ],
                       ),
                     ),
-                    Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                    const Spacer(),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
                       child: Column(children: [Text("1/3")]),
                     ),
                   ],
@@ -500,8 +457,8 @@ class _ViewhotelState extends State<Viewhotel> {
                 child: TextFormField(
                   decoration: InputDecoration(
                     hintText: "search for dishes",
-                    prefixIcon: Icon(Icons.search),
-                    suffixIcon: Icon(Icons.mic, color: Colors.red),
+                    prefixIcon: const Icon(Icons.search),
+                    suffixIcon: const Icon(Icons.mic, color: Colors.red),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide.none,
@@ -511,107 +468,122 @@ class _ViewhotelState extends State<Viewhotel> {
               ),
             ),
             SectionHeader(title: 'Top Views', onSeeAll: () {}),
-            Padding(
-              padding: const EdgeInsets.only(left: 8, top: 8),
-              child: Stack(
-                children: [
-                  Container(
-                    height: 240,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/china.png"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    child: Container(
-                      height: 50,
-                      width: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
-                        ),
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.transparent,
-                            Colors.black.withOpacity(0.9),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 10,
-                    right: 10,
-                    child: SvgPicture.asset(
-                      "assets/icons/nonlike.svg",
-                      height: 40,
-                    ),
-                  ),
-                  Positioned(
-                    left: 14,
-                    bottom: 10,
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "No discount\n",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.white,
-                              fontFamily: "poppins-bold",
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: topViewData.map((item) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 8, top: 8),
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 240,
+                          width: 200,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(
+                              image: NetworkImage(item['image'] ?? "assets/images/china.png"),
+                              fit: BoxFit.cover,
                             ),
                           ),
-                          TextSpan(
-                            text: 'N/A',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 11,
-                              color: Color(0xFFDEDEDE),
-                              fontFamily: "poppins-medium",
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          child: Container(
+                            height: 100,
+                            width: 200,
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                              ),
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.black.withOpacity(0.9),
+                                ],
+                              ),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 10,
-                    right: 10,
-                    child: Container(
-                      height: 30,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        gradient: AppColors.primaryGradient,
-                      ),
-                      child: Center(
-                        child: Text(
-                          "ADD",
-                          style: TextStyle(
-                            fontFamily: "poppins-bold",
-                            color: Colors.white,
+                        ),
+                        Positioned(
+                          top: 10,
+                          right: 10,
+                          child: SvgPicture.asset(
+                            "assets/icons/nonlike.svg",
+                            height: 40,
                           ),
                         ),
-                      ),
+                        Positioned(
+                          left: 14,
+                          bottom: 10,
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "${item['discount'] ?? 'No discount'}\n",
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontFamily: "poppins-bold",
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: item['maxDiscount'] ?? 'N/A',
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 11,
+                                    color: Color(0xFFDEDEDE),
+                                    fontFamily: "poppins-medium",
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 10,
+                          right: 10,
+                          child: Container(
+                            height: 30,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              gradient: AppColors.primaryGradient,
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "ADD",
+                                style: TextStyle(
+                                  fontFamily: "poppins-bold",
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                  );
+                }).toList(),
               ),
             ),
           ],
         ),
       ),
     );
+  }
 
-    return _showSafeArea ? content : SafeArea(child: content);
+  String _getStarIcon(double rating) {
+    if (rating >= 0.0 && rating <= 1.9) return 'assets/icons/0star.svg';
+    if (rating >= 2.0 && rating <= 2.4) return 'assets/icons/1star.svg';
+    if (rating >= 2.5 && rating <= 2.9) return 'assets/icons/2star.svg';
+    if (rating >= 3.0 && rating <= 3.4) return 'assets/icons/3star.svg';
+    if (rating >= 3.5 && rating <= 3.9) return 'assets/icons/4star.svg';
+    if (rating >= 4.0 && rating <= 5.0) return 'assets/icons/5star.svg';
+    return 'assets/icons/0star.svg';
   }
 }
