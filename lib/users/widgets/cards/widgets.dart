@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../utils/themes.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SectionHeader extends StatelessWidget {
@@ -469,10 +468,10 @@ class SectionHeader extends StatelessWidget {
 
 class CardWidget extends StatefulWidget {
   final Map<String, dynamic> data;
-  final String cardType; // 'food', 'mind', or 'all'
+  final String cardType;
   final double? width;
   final double? height;
-  final VoidCallback? onTap; // Add onTap callback
+  final VoidCallback? onTap;
 
   const CardWidget({
     super.key,
@@ -595,7 +594,7 @@ class _CardWidgetState extends State<CardWidget> {
                   child: GestureDetector(
                     onTap: () => setState(() => _isLiked = !_isLiked),
                     child: SvgPicture.asset(
-                      _isLiked ? 'assets/icons/like.svg' : 'assets/icons/nonlike1.svg',
+                      _isLiked ? 'assets/icons/like.svg' : 'assets/icons/nonlike.svg',
                       height: 22,
                       width: 22,
                     ),
@@ -751,7 +750,7 @@ class _CardWidgetState extends State<CardWidget> {
                       child: GestureDetector(
                         onTap: () => setState(() => _isLiked = !_isLiked),
                         child: SvgPicture.asset(
-                          _isLiked ? 'assets/icons/like.svg' : 'assets/icons/nonlike1.svg',
+                          _isLiked ? 'assets/icons/like.svg' : 'assets/icons/nonlike.svg',
                           height: 28,
                           width: 18,
                         ),

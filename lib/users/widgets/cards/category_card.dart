@@ -126,14 +126,17 @@ class ServiceGrid extends StatelessWidget {
       final double imageTop = cardHeight - imageSize - 5;
       final double firstImageTop = cardHeight - imageSize - 4;
 
-      // Define onTap behavior based on the service title
+
       VoidCallback? onTap;
       if (service['title'] == 'FOOD & GROCERY') {
         onTap = () {
-          Get.to(() =>  FoodAndGrocery());
+          Get.to(() =>  FoodAndGrocery(),
+              transition: Transition.rightToLeft, // Animation type
+              duration: Duration(milliseconds: 500)
+          );
         };
       }
-      // Add more conditions for other services if needed
+
 
       return Directionality(
         textDirection: TextDirection.ltr,
