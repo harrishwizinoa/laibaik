@@ -116,11 +116,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:laibaik/modules/controller/controller.dart';
-
 import 'package:laibaik/translation.dart';
 import 'package:laibaik/users/screens/categories.dart';
-import 'package:laibaik/users/screens/categories/FoodAndgrocery/food_and_grocery.dart';
-import 'package:laibaik/users/screens/categories/FoodAndgrocery/viewHotel.dart';
 import 'package:laibaik/users/screens/home_screen.dart';
 import 'package:laibaik/utils/themes.dart';
 
@@ -128,7 +125,6 @@ import 'Auth/get_started.dart';
 
 void main() {
   Get.put(valueController());
-  //runApp(BottomNav());
   runApp(const MyApp());
 }
 final valueController vController = Get.put(valueController());
